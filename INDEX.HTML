@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Word MCQ Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            color: white;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .instructions {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .instructions h2 {
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .test-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #ddd;
+        }
+        
+        .option:hover {
+            background-color: #f0f0f0;
+            border-color: #bbb;
+        }
+        
+        .option.selected {
+            background-color: #e6f7ff;
+            border-color: #667eea;
+        }
+        
+        .option input {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+        
+        .option label {
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+        }
+        
+        .submit-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .results {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 25px;
+        }
+        
+        .results h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 20px 0;
+        }
+        
+        .score-details {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .restart-btn {
+            background: linear-gradient(to right, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (min-width: 768px) {
+            .options {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            header h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Microsoft Excel MCQ Test</h1>
+            <p>Test your knowledge of Microsoft Excel with these 41 multiple choice questions</p>
+        </header>
+        
+        <div class="instructions">
+            <h2>Instructions</h2>
+            <ul>
+                <li>This test contains 10 multiple choice questions about Microsoft Excel</li>
+                <li>Select one answer for each question</li>
+                <li>Click the "Submit Answers" button at the end to see your score</li>
+                <li>You will receive 1 point for each correct answer</li>
+                <li>Good luck!</li>
+            </ul>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <div class="test-container" id="test-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="submit-section">
+            <button class="submit-btn" id="submit-btn">
+                <i class="fas fa-paper-plane"></i> Submit Answers
+            </button>
+        </div>
+        
+        <div class="results" id="results">
+            <h2>Your Results</h2>
+            <div class="score" id="score">0/10</div>
+            <div class="score-details" id="score-details"></div>
+            <button class="restart-btn" id="restart-btn">
+                <i class="fas fa-redo"></i> Take Test Again
+            </button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 Microsoft Word MCQ Test | Designed for Educational Purposes</p>
+    </footer>
+
+    <script>
+        // Sample questions data (shortened for brevity)
+      const questions = [
+    // Already shared first 10 above ...
+    {
+        question: "Which function returns the highest value in a range?",
+        options: ["MAX()", "HIGH()", "LARGE()", "TOP()"],
+        answer: 0
+    },
+    {
+        question: "Which function returns the lowest value in a range?",
+        options: ["MIN()", "LOW()", "SMALL()", "BOTTOM()"],
+        answer: 0
+    },
+    {
+        question: "Which function counts numeric values in a range?",
+        options: ["COUNT()", "COUNTA()", "COUNTIF()", "SUM()"],
+        answer: 0
+    },
+    {
+        question: "Which function counts all non-empty cells?",
+        options: ["COUNT()", "COUNTA()", "COUNTIF()", "COUNTBLANK()"],
+        answer: 1
+    },
+    {
+        question: "Which function counts blank cells in a range?",
+        options: ["ISBLANK()", "COUNT()", "COUNTBLANK()", "COUNTA()"],
+        answer: 2
+    },
+    {
+        question: "What is a Pivot Table used for?",
+        options: [
+            "To merge sheets",
+            "To summarize and analyze data",
+            "To format text",
+            "To filter only blank rows"
+        ],
+        answer: 1
+    },
+    {
+        question: "Which shortcut key saves a workbook in Excel?",
+        options: ["Ctrl + O", "Ctrl + N", "Ctrl + S", "Ctrl + P"],
+        answer: 2
+    },
+    {
+        question: "Which key combination creates a new workbook?",
+        options: ["Ctrl + W", "Ctrl + N", "Ctrl + O", "Ctrl + Shift + N"],
+        answer: 1
+    },
+    {
+        question: "Which shortcut opens an existing workbook?",
+        options: ["Ctrl + O", "Ctrl + N", "Ctrl + E", "Ctrl + L"],
+        answer: 0
+    },
+    {
+        question: "Which shortcut prints the worksheet?",
+        options: ["Ctrl + P", "Ctrl + S", "Ctrl + F2", "Ctrl + Shift + P"],
+        answer: 0
+    },
+    {
+        question: "Which operator is used for multiplication in Excel formulas?",
+        options: ["x", "X", "*", "/"],
+        answer: 2
+    },
+    {
+        question: "Which operator is used for division in Excel formulas?",
+        options: ["-", "/", "\\", "%"],
+        answer: 1
+    },
+    {
+        question: "Which function returns the current system date?",
+        options: ["NOW()", "DATE()", "TODAY()", "TIME()"],
+        answer: 2
+    },
+    {
+        question: "Which function returns the current system date and time?",
+        options: ["NOW()", "DATE()", "TODAY()", "TIME()"],
+        answer: 0
+    },
+    {
+        question: "Which symbol is used to lock a cell reference in Excel?",
+        options: ["@", "#", "$", "&"],
+        answer: 2
+    },
+    {
+        question: "What is the default number of worksheets in a new Excel 2016 workbook?",
+        options: ["1", "2", "3", "5"],
+        answer: 0
+    },
+    {
+        question: "Which option protects a worksheet from editing?",
+        options: [
+            "File -> Protect Sheet",
+            "Data -> Protect",
+            "Review -> Protect Sheet",
+            "Insert -> Protect"
+        ],
+        answer: 2
+    },
+    {
+        question: "Which option is used to merge multiple cells into one?",
+        options: ["Wrap Text", "Merge & Center", "AutoFit", "Justify"],
+        answer: 1
+    },
+    {
+        question: "Which chart is best for showing proportions of a whole?",
+        options: ["Bar Chart", "Line Chart", "Pie Chart", "Scatter Chart"],
+        answer: 2
+    },
+    {
+        question: "Which function joins two or more text strings together?",
+        options: ["TEXT()", "CONCATENATE()", "JOIN()", "LINK()"],
+        answer: 1
+    },
+    {
+        question: "Which function is used to search for a value in a table by column?",
+        options: ["HLOOKUP()", "VLOOKUP()", "LOOKUP()", "SEARCH()"],
+        answer: 1
+    },
+    {
+        question: "Which function is used to search for a value in a table by row?",
+        options: ["HLOOKUP()", "VLOOKUP()", "LOOKUP()", "SEARCH()"],
+        answer: 0
+    },
+    {
+        question: "Which function is used to remove spaces from text in Excel?",
+        options: ["CLEAN()", "TRIM()", "PROPER()", "TEXT()"],
+        answer: 1
+    },
+    {
+        question: "Which function changes text to uppercase?",
+        options: ["UPPER()", "LOWER()", "PROPER()", "CAPS()"],
+        answer: 0
+    },
+    {
+        question: "Which function changes text to lowercase?",
+        options: ["UPPER()", "LOWER()", "PROPER()", "CAPS()"],
+        answer: 1
+    },
+    {
+        question: "Which function capitalizes the first letter of each word?",
+        options: ["UPPER()", "LOWER()", "PROPER()", "TITLE()"],
+        answer: 2
+    },
+    {
+        question: "Which function calculates the number of characters in a text string?",
+        options: ["LEN()", "COUNT()", "SIZE()", "CHAR()"],
+        answer: 0
+    },
+    {
+        question: "Which function extracts a specified number of characters from the start of text?",
+        options: ["RIGHT()", "MID()", "LEFT()", "TRIM()"],
+        answer: 2
+    },
+    {
+        question: "Which function extracts a specified number of characters from the end of text?",
+        options: ["RIGHT()", "MID()", "LEFT()", "TRIM()"],
+        answer: 0
+    },
+    {
+        question: "Which function extracts characters from the middle of text?",
+        options: ["RIGHT()", "MID()", "LEFT()", "CENTER()"],
+        answer: 1
+    },
+    {
+        question: "Which function is used to round a number to the nearest integer?",
+        options: ["ROUND()", "ROUNDUP()", "ROUNDDOWN()", "INT()"],
+        answer: 0
+    },
+    {
+        question: "Which function always rounds a number up?",
+        options: ["ROUND()", "ROUNDUP()", "ROUNDDOWN()", "INT()"],
+        answer: 1
+    },
+    {
+        question: "Which function always rounds a number down?",
+        options: ["ROUND()", "ROUNDUP()", "ROUNDDOWN()", "TRUNC()"],
+        answer: 2
+    },
+    {
+        question: "Which error value means a formula has divided by zero?",
+        options: ["#REF!", "#N/A", "#VALUE!", "#DIV/0!"],
+        answer: 3
+    },
+    {
+        question: "Which error value means an invalid cell reference?",
+        options: ["#REF!", "#N/A", "#VALUE!", "#DIV/0!"],
+        answer: 0
+    },
+    {
+        question: "Which error value means data type mismatch?",
+        options: ["#REF!", "#N/A", "#VALUE!", "#DIV/0!"],
+        answer: 2
+    },
+    {
+        question: "Which error value means a missing value?",
+        options: ["#REF!", "#N/A", "#VALUE!", "#DIV/0!"],
+        answer: 1
+    },
+    {
+        question: "Which Excel feature highlights cells based on conditions?",
+        options: [
+            "Data Validation",
+            "Conditional Formatting",
+            "Data Filter",
+            "AutoFormat"
+        ],
+        answer: 1
+    },
+    {
+        question: "Which Excel feature prevents invalid data entry in a cell?",
+        options: [
+            "Data Validation",
+            "Conditional Formatting",
+            "Pivot Table",
+            "Filter"
+        ],
+        answer: 0
+    },
+    {
+        question: "Which function is used to lookup values by both row and column?",
+        options: ["INDEX()", "MATCH()", "LOOKUP()", "INDEX() + MATCH()"],
+        answer: 3
+    },
+    {
+        question: "Which chart is best for comparing multiple categories side by side?",
+        options: ["Pie Chart", "Line Chart", "Column Chart", "Area Chart"],
+        answer: 2
+    }
+];
+
+
+        // DOM elements
+        const testContainer = document.getElementById('test-container');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultsDiv = document.getElementById('results');
+        const scoreDiv = document.getElementById('score');
+        const scoreDetailsDiv = document.getElementById('score-details');
+        const restartBtn = document.getElementById('restart-btn');
+        const progressBar = document.getElementById('progress');
+
+        // Initialize test
+        function initializeTest() {
+            testContainer.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const questionEl = document.createElement('div');
+                questionEl.className = 'question';
+                
+                questionEl.innerHTML = `
+                    <div class="question-number">Question ${index + 1}/${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option" data-index="${i}">
+                                <input type="radio" name="question${index}" id="q${index}opt${i}" value="${i}">
+                                <label for="q${index}opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                testContainer.appendChild(questionEl);
+            });
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const questionIndex = parseInt(option.parentElement.parentElement.querySelector('.question-number').textContent.split(' ')[1].split('/')[0]) - 1;
+                    const optionIndex = parseInt(option.getAttribute('data-index'));
+                    
+                    // Clear other selections in this question
+                    const options = option.parentElement.querySelectorAll('.option');
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Select this option
+                    option.classList.add('selected');
+                    option.querySelector('input').checked = true;
+                    
+                    // Update progress bar
+                    updateProgressBar();
+                });
+            });
+            
+            // Hide results and show test
+            resultsDiv.style.display = 'none';
+            testContainer.style.display = 'block';
+            submitBtn.style.display = 'block';
+            
+            // Reset progress bar
+            progressBar.style.width = '0%';
+        }
+
+        // Update progress bar based on answered questions
+        function updateProgressBar() {
+            const answeredQuestions = document.querySelectorAll('input:checked').length;
+            const progress = (answeredQuestions / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Calculate score
+        function calculateScore() {
+            let score = 0;
+            const userAnswers = [];
+            
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const userAnswer = selectedOption ? parseInt(selectedOption.value) : -1;
+                userAnswers.push(userAnswer);
+                
+                if (userAnswer === q.answer) {
+                    score++;
+                }
+            });
+            
+            return { score, userAnswers };
+        }
+
+        // Show results
+        function showResults(score, userAnswers) {
+            scoreDiv.textContent = `${score}/${questions.length}`;
+            
+            let detailsHTML = '<div style="text-align: left; margin-top: 20px;">';
+            questions.forEach((q, index) => {
+                const isCorrect = userAnswers[index] === q.answer;
+                detailsHTML += `
+                    <div style="margin-bottom: 15px; padding: 10px; border-left: 4px solid ${isCorrect ? '#4CAF50' : '#F44336'}; background-color: #f9f9f9;">
+                        <div style="font-weight: bold;">Q${index + 1}: ${q.question}</div>
+                        <div style="color: ${isCorrect ? '#4CAF50' : '#F44336'}; margin-top: 5px;">
+                            ${isCorrect ? '✓ Correct' : '✗ Incorrect'}
+                        </div>
+                    </div>
+                `;
+            });
+            detailsHTML += '</div>';
+            
+            scoreDetailsDiv.innerHTML = detailsHTML;
+            
+            // Hide test and show results
+            testContainer.style.display = 'none';
+            submitBtn.style.display = 'none';
+            resultsDiv.style.display = 'block';
+        }
+
+        // Event listeners
+        submitBtn.addEventListener('click', () => {
+            const { score, userAnswers } = calculateScore();
+            showResults(score, userAnswers);
+        });
+
+        restartBtn.addEventListener('click', initializeTest);
+
+        // Initialize the test
+        initializeTest();
+    </script>
+</body>
+</html>
